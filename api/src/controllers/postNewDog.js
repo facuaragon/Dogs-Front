@@ -9,8 +9,14 @@ const postNewDog = async ({ image, name, height, weight, life_span, temperament 
         // if there is data missing => throw error
         if( !image || !name || !height || !weight || !life_span ) throw new Error("Data missing");
         
+
+        // In order to save the new dog with an incremental ID that follows the APIs IDs
+        // we set the id of the new dog
+        let dogsDb = await Dog.findAll();
+        const id = 265 + dogsDb.length;
         // create new dog in DB
         const newDog = await Dog.create({ 
+            id: id,
             image, 
             name, 
             height, 

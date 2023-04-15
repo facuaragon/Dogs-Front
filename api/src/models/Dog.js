@@ -5,9 +5,11 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Dog', {
     id:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+
     },
     image:{
       type: DataTypes.STRING,
@@ -17,6 +19,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      set(value){
+        this.setDataValue('name', value = value.toLowerCase().trim().split(' ').map( word => word[0].toUpperCase() + word.substr(1) ).join(' '))
+      }
     },
     height:{
       type: DataTypes.STRING,

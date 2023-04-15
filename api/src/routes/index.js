@@ -81,6 +81,7 @@ router.post("/dogs", async ( req, res ) => {
     }
 })
 
+// GET temperaments
 router.get("/temperaments", async ( req, res ) => {
     try {
         const temperaments = await saveTemperamentData();
