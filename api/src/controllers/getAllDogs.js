@@ -12,6 +12,7 @@ const getAllDogs = async ()=>{
         if(dogsApi){
             dogsApi = dogsApi.data.map(dog=>{
                 return {
+                    id: dog.id,
                     name: dog.name,
                     image: dog.image.url,
                     temperament: dog.temperament,
@@ -35,6 +36,7 @@ const getAllDogs = async ()=>{
         if(dogsDb){
             dogsDb = dogsDb.map(dog=>{
                 return {
+                    id: dog.id,
                     name: dog.name,
                     image: dog.image,
                     temperament: dog.Temperaments.map(tempe=> {return tempe.name}).join(", "),

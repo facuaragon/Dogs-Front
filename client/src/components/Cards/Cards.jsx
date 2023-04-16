@@ -1,14 +1,16 @@
 import styles from './Cards.module.css'
 import Card from '../Card/Card'
 
-function Cards({allDogs}){
+function Cards({ dogs, loading }){
 
-    const dogsList = allDogs;
+    if(loading){
+        return <h2>Loading...</h2>
+    }
 
     return (
         <div className={styles.cardList}>
-            { dogsList?.map( dog => (
-                <Card dog={dog} />
+            { dogs.map( dog => (
+                <Card dog={dog} key={dog.id} />
             ))}
         </div>
     )

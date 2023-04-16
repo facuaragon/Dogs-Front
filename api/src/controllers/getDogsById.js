@@ -25,6 +25,7 @@ const getDogsById = async ( id )=>{
             return {
                 id: dog.id,
                 name: dog.name,
+                image: dog.image.url,
                 height: dog.height.metric,
                 weight: dog.weight.metric,
                 temperament: dog.temperament,
@@ -51,6 +52,7 @@ const getDogsById = async ( id )=>{
         dogsByIdDb = dogsByIdDb.map(dog=>{
             return {
                 id: dog.id,
+                image: dog.image,
                 name: dog.name,
                 height: dog.height,
                 weight: dog.weight,
@@ -70,6 +72,7 @@ const getDogsById = async ( id )=>{
         allDogs = allDogs.map(dog=>{
             return {
                 id: dog.id,
+                image: dog.image,
                 name: dog.name,
                 height: dog.height,
                 weight: dog.weight,
@@ -80,7 +83,7 @@ const getDogsById = async ( id )=>{
         })
         
         // return result
-        return allDogs;
+        return allDogs[0];
 
     } catch ( error ) {
         return { error:error.message }

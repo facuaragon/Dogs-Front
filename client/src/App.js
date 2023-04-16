@@ -8,6 +8,8 @@ import Home from './views/home/Home';
 import Detail from './views/detail/Detail';
 import Create from './views/create/Create';
 
+import Pagination from './components/Pagination/Pagination';
+
 
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
         <Route exact path='/home' element={ <Home /> } />
         <Route path='/home/:id' element={ <Detail /> } />
         <Route path='/create' element={ <Create /> } />
+
+        <Route path='/pagination' element={ <Pagination /> } />
+
       </Routes>
 
     </div>

@@ -87,6 +87,7 @@ router.get("/temperaments", async ( req, res ) => {
         const temperaments = await saveTemperamentData();
         
         return res.status(200).json(temperaments);
+
     } catch (error) {
         return res.status(404).send(error.message);
     }

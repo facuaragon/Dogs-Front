@@ -28,14 +28,14 @@ export const getDogsByName = (name) =>{
 
 export const addDog = (dog) =>{
     return async function(dispatch){
-        const response = await axios.post("localhost:3001/dogs/", dog)
+        const response = await axios.post("http://localhost:3001/dogs/", dog)
         dispatch({type: ADD_DOG, payload: response.data})
     }
 }
 
 export const getTemperaments = () => {
     return async function(dispatch){
-        const response = await axios.get("localhost:3001/temperaments")
+        const response = await axios.get("http://localhost:3001/temperaments")
         dispatch({type: GET_TEMPERAMENTS, payload: response.data})
     }
 }

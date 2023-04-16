@@ -7,15 +7,23 @@ const saveTemperamentData = async () =>{
     try {
         // call a function to get Temperaments data from the API
         // this function returns an array of objects
-        const allTemperaments = await getTemperaments();
-
-        // if no Temperaments => throw error
-        if(!allTemperaments) throw new Error( "There are no Temperaments to show" )
+        let dbTemps = await Temperament.findAll();
         
-        // bulkcreat allow us to create multiple records at once with only one query
-        // we must send an array of objects
-        await Temperament.bulkCreate(allTemperaments);
-        return allTemperaments;
+        if(dbTemps.length===0){
+
+            const allTemperaments = await getTemperaments();
+
+            // if no Temperaments => throw error
+            if(!allTemperaments) throw new Error( "There are no Temperaments to show" )
+            
+            // bulkcreat allow us to create multiple records at once with only one query
+            // we must send an array of objects
+            await Temperament.bulkCreate(allTemperaments);
+            return allTemperaments;
+        }
+        else{
+            return dbTemps;
+        }
     } catch (error) {
         return {error: error.message}
     }

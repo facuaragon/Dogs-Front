@@ -1,4 +1,4 @@
-const {Dog} = require("../db");
+const {Dog,Temperament} = require("../db");
 const { Op } = require("sequelize");
 require('dotenv').config();
 const { API_QUERY_URL } = process.env;
@@ -13,32 +13,61 @@ const getDogsByName =  async ( name )=>{
         name = name.toLowerCase().trim().split(' ').map( word => word[0].toUpperCase() + word.substr(1) ).join(' ');  
         
         // asks API names
-        const dogsByNameApi = await axios.get( `${API_QUERY_URL}${name}`);
+        let dogsByNameApi = await axios.get( `${API_QUERY_URL}${name}`);
+        dogsByNameApi = dogsByNameApi.data;
+
         
-        // saves response in new array
-        let allDogs = dogsByNameApi.data;
+        dogsByNameApi = dogsByNameApi.map(dog=>{
+            if(!dog.temperament) dog.temperament = '';
+            return {
+                id: dog.id,
+                name: dog.name,
+                image: `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg`,
+                temperament: dog.temperament,
+                weight: dog.weight.metric
+            }
+        })
+        
         
         // searches in DB 
-        const dogsByNameDb = await Dog.findAll({
+        let dogsByNameDb = await Dog.findAll({
             where: {
                 name: {
                     [Op.substring]: name,
                 },
+            },
+            include: {
+                model: Temperament,
+                attributes:["name"],
+                through:{
+                    attributes: [],
+                }
             }
         });
+
+        dogsByNameDb = dogsByNameDb.map(dog=>{
+            return {
+                id: dog.id,
+                name: dog.name,
+                image: dog.image,
+                weight: dog.weight,
+                temperament: dog.Temperaments.map(tempe=> {return tempe.name}).join(", "),
+
+            }
+        })
         
         // add DB results in array
-        allDogs=allDogs.concat(dogsByNameDb);
+        let allDogs=dogsByNameApi.concat(dogsByNameDb);
             
         // if there are no dogs => throw Error
         if( allDogs.length === 0 ) throw new Error( "There are no dogs to show for the given name" );
         
         // save required fields (name)
-        allDogs = allDogs.map(dog=>{
-            return {
-                name: dog.name
-            }
-        })
+        // allDogs = allDogs.map(dog=>{
+        //     return {
+        //         name: dog.name
+        //     }
+        // })
         
         // return result
         return allDogs;

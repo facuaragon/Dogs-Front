@@ -1,11 +1,11 @@
 import styles from './Navbar.module.css'
 
-function Navbar(){
+function Navbar({handleSubmit, handleChange, handleKeyDown}){
     return (
         <div className={styles.searchBox}>
-            <form>
-                <input placeholder="Search By Breed" />
-                <button>Search</button>
+            <form onChange={handleChange} >
+                <input type='search' placeholder="Search By Breed" onKeyDown={handleKeyDown}/>
+                <button type='submit' onClick={handleSubmit} >Search</button>
             </form>
         </div>
     )
