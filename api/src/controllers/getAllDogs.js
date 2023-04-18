@@ -4,59 +4,51 @@ const { API_URL, API_KEY } = process.env;
 const axios = require("axios")
 
 const getAllDogs = async ()=>{
-    try {
-        // API get request for all dogs
-        let dogsApi = await axios.get( `${API_URL}?api_key=${API_KEY}` );
+    let dogsDb = await getDb();
+    let dogsApi = await getApi();
+    let allDogs = dogsApi.concat(dogsDb);
+    return allDogs;
+}
 
-        // save required fields (name)
-        if(dogsApi){
-            dogsApi = dogsApi.data.map(dog=>{
-                return {
-                    id: dog.id,
-                    name: dog.name,
-                    image: dog.image.url,
-                    temperament: dog.temperament,
-                    weight: dog.weight.metric
-                }
-            })
+const getApi = async () => {
+    const dogsApi = await axios.get(`${API_URL}?api_key=${API_KEY}`)
+    let dogsInfo = await dogsApi.data.map(dog=>{
+        return {
+            id: dog.id,
+            name: dog.name,
+            temperament: dog.temperament,
+            weight: dog.weight.metric,
+            height: dog.height.metric,
+            life_span: dog.life_span,
+            image: dog.image.url,
         }
+    })
+    return dogsInfo
+}
 
-        // DB search for all dogs
-        let dogsDb = await Dog.findAll({
-            include: {
-                model: Temperament,
-                attributes:["name"],
-                through:{
-                    attributes: [],
-                }
+const getDb = async () => {
+    let dogsDb = await Dog.findAll({
+        include: {
+            model: Temperament,
+            attributes:["name"],
+            through:{
+                attributes: [],
             }
-        });
-
-        // save required fields (name)
-        if(dogsDb){
-            dogsDb = dogsDb.map(dog=>{
-                return {
-                    id: dog.id,
-                    name: dog.name,
-                    image: dog.image,
-                    temperament: dog.Temperaments.map(tempe=> {return tempe.name}).join(", "),
-                    weight: dog.weight
-                }
-            })
         }
-
-        // new array with both searches
-        let allDogs = dogsApi.concat(dogsDb);
-
-        // if there are no dogs => throw error
-        if( allDogs.length === 0 ) throw new Error( "There are no Dogs to show" );
-        
-        // return result
-        return allDogs;
-        
-    } catch ( error ) {
-        return { error:error.message }
-    }
+    });
+    dogsDb = dogsDb.map(dog=>{
+        return {
+            id: dog.id,
+            name: dog.name,
+            weight: dog.weight,
+            height: dog.height,
+            life_span: dog.life_span,
+            image: dog.image,
+            temperament: dog.Temperaments.map(tempe=> {return tempe.name}).join(", "),
+            createdInDb: dog.createdInDb
+        }
+    })
+    return dogsDb;
 }
 
 module.exports = getAllDogs;

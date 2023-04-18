@@ -9,6 +9,8 @@ const saveTemperamentData = async () =>{
         // this function returns an array of objects
         let dbTemps = await Temperament.findAll();
         
+        //console.log(dbTemps);
+
         if(dbTemps.length===0){
 
             const allTemperaments = await getTemperaments();

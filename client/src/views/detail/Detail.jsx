@@ -15,29 +15,34 @@ function Detail(){
     useEffect(()=>{
         dispatch( getDogDetail(id) );
         return ( () => {
-            cleanDetail();
+            dispatch(cleanDetail());
         } )
     }, [dispatch] );
     
-    console.log(id);
-    console.log(dogDetails);
-
     const { image, name, weight, height, temperament, life_span} = dogDetails
 
+    
+    
+        return (
+            <div className={styles.cardContainer}>
+                {name ? (
+                    <>
+                        <h2 className={styles.title}>{name}</h2>
+                        <div className={styles.imageContainer}>
+                            <img className={styles.image} src={image} alt='img' />
+                        </div>
+                        <p>Weight: {weight} kg</p>
+                        <p>Height: {height} kg</p>
+                        <p>Life Span: {life_span} kg</p>
+                        <p>Temperaments: {temperament} </p>   
+                    </>
+                ) : (
+                    <h3>Loading...</h3>
+                )}
 
-
-    return (
-        <div className={styles.cardContainer}>
-            <h2 className={styles.title}>{name}</h2>
-            <div className={styles.imageContainer}>
-                <img className={styles.image} src={image} alt='img' />
             </div>
-            <p>Weight: {weight} kg</p>
-            <p>Height: {height} kg</p>
-            <p>Life Span: {life_span} kg</p>
-            <p>Temperaments: {temperament} </p>   
-        </div>
-    )
+        )
+   
 }
 
 export default Detail;

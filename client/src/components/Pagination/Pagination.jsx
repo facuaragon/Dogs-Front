@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from './Pagination.module.css'
+//import styles from './Pagination.module.css'
 
 
 const Paginas = ({dogsPerPage, totalDogs, paginate}) => {
@@ -13,13 +13,13 @@ const Paginas = ({dogsPerPage, totalDogs, paginate}) => {
     return (
         <nav>
             <ul>
-                {pageNumbers.map(page=>(
-                    <li onClick={()=>paginate(page)} key={page}>
-                        <a href='/home/#'>
-                            {page}
-                        </a>
-                    </li>
-                ))}
+                {pageNumbers?.map(page=>{
+                    return (
+                        <li key={page}>
+                            <button onClick={()=>paginate(page)}>{page}</button>
+                        </li>
+                    )
+                })}
             </ul>
         </nav>
     )

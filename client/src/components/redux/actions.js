@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS } from "./action-types"
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS } from "./action-types"
 import axios from "axios";
 
 export const getAllDogs = () =>{
@@ -38,4 +38,24 @@ export const getTemperaments = () => {
         const response = await axios.get("http://localhost:3001/temperaments")
         dispatch({type: GET_TEMPERAMENTS, payload: response.data})
     }
+}
+
+export const filterByName = (payload) => {
+    return { type: FILTER_BY_NAME, payload }
+}
+
+export const filterByWeight = (payload) => {
+    return { type: FILTER_BY_WEIGHT, payload }
+}
+
+export const filterCreatedDog = (payload) => {
+    return { type: FILTER_CREATED_DOG, payload }
+}
+
+export const filterByTemperament = (payload) => {
+    return{ type: FILTER_BY_TEMPERAMENTS, payload }
+}
+
+export const cleanFilters = () => {
+    return {type: CLEAN_FILTERS}
 }

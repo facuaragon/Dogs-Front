@@ -1,12 +1,7 @@
 const { Router } = require('express');
 const getAllDogs = require('../controllers/getAllDogs');
-const getDogsById = require('../controllers/getDogsById');
-const getDogsByName = require('../controllers/getDogsByName');
 const postNewDog = require('../controllers/postNewDog');
 const saveTemperamentData = require("../controllers/saveTemperamentData");
-
-//! eliminar luego Bulk create
-const bulkCreateDogs = require('../controllers/bulkCreateDogs');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -17,52 +12,42 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-//! Bulk create (eliminar luego)
-router.post("/bulkdogs", async ( req, res ) => {
-    try {
-        const dogs = await bulkCreateDogs();
-        return res.status(200).send(dogs);
-    } catch (error) {
-        return res.status(404).send(error.message);
-    }
-})
-
-
 // GET Route
 // works for GET /dogs and GET /dogs/?name=".."
 
 router.get("/dogs", async ( req, res ) => {
+    const {name} = req.query;
+    const allDogs = await getAllDogs()
     try {
-
-        // save query name
-        const {name} = req.query;
-        
-        // if there is not a query => get all dogs
-        if(!name){
-            const allDogs = await getAllDogs();
-            return res.status(200).json(allDogs);
-        }
-        // else (there is a query) => get dogs by name
-        else{
-            const dogsByName = await getDogsByName(name);
-            return res.status(200).json(dogsByName);
+        if(name){
+            const dog = allDogs.filter(dog=> dog.name.toLowerCase().includes(name.toLowerCase()))
+            if(dog.length){
+                return res.status(200).send(dog) //! ojo aca json o send?
+            } else {
+                return res.status(404).send({error: "No matches for these name"})
+            }
+        } else {
+            return res.status(201).json(allDogs)
         }
     } catch (error) {
-        return res.status(404).send(error.message);
+        return res.status(404).send({error: "No matches for these name"});
     }
 })
 
 // GET by ID route
-router.get("/dogs/:id", async ( req, res ) => {
+router.get("/dogs/:idRaza", async ( req, res ) => {
+    let {idRaza} = req.params;
+    idRaza = Number(idRaza);
+    const allDogs = await getAllDogs(); 
     try {
-        // get id from params
-        const {id} = req.params;
-
-        // get dogs by id
-        const dogsById = await getDogsById(id);
-        return res.status(200).json(dogsById);
+        const dog = allDogs.find(dog => dog.id === idRaza)
+        if( dog ){
+            return res.status(200).json(dog);
+        } else {
+            return res.status(404).send({error: "No matches for the ID given"})
+        }
     } catch (error) {
-        return res.status(404).send(error.message);
+        return res.status(404).send({error: "No matches for the ID given"})
     }
 })
 

@@ -1,0 +1,46 @@
+
+  .landingPage {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../images/dogs-image-placeholder-copia.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  .title {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+    color: rgb(52, 14, 14);
+  }
+  
+  .button {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #6b7341;
+    border-radius: 25px;
+    text-decoration: none;
+  }
+  .button:hover {
+    scale: 1.05;
+    transition: 0.25s;
+  }
