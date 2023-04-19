@@ -101,7 +101,9 @@ const rootReducer = (state=initialState, action) =>{
         case ADD_DOG:
             return {
                 ...state,
-                allDogs: [...state.allDogs, action.payload]
+                allDogs: [...state.dogsCopy, action.payload],
+                dogsCopy: [...state.dogsCopy, action.payload],
+                dogsFiltered: [...state.dogsCopy, action.payload],
             }
     
         default:

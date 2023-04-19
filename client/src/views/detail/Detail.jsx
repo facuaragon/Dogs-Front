@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from "react-router-dom";
 
 
-import { getDogDetail } from '../../components/redux/actions';
-import { cleanDetail } from '../../components/redux/actions';
+import { getDogDetail, cleanDetail, cleanDogCreated } from '../../components/redux/actions';
+
 
 function Detail(){
     const dispatch = useDispatch();
@@ -16,6 +16,7 @@ function Detail(){
         dispatch( getDogDetail(id) );
         return ( () => {
             dispatch(cleanDetail());
+            //dispatch(cleanDogCreated());
         } )
     }, [dispatch] );
     
@@ -32,8 +33,8 @@ function Detail(){
                             <img className={styles.image} src={image} alt='img' />
                         </div>
                         <p>Weight: {weight} kg</p>
-                        <p>Height: {height} kg</p>
-                        <p>Life Span: {life_span} kg</p>
+                        <p>Height: {height} cm</p>
+                        <p>Life Span: {life_span} </p>
                         <p>Temperaments: {temperament} </p>   
                     </>
                 ) : (
