@@ -1,3 +1,29 @@
-a {
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+
+}
+
+.list li{
+    padding: 8px;
+
+}
+
+.list button{
+    width: 30px;
+    font-size: small;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.35);
+    background-color: transparent;
+    border-color: grey;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.list button:hover{
+    scale: 1.1;
 }

@@ -1,25 +1,91 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: linear-gradient(
-        to left,
-        rgba(7, 27, 82, 1) 0%,
-        rgba(0, 128, 128, 1) 100%
-    );
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(90deg,#f3deba 0%, #abc4aa 30%);
     text-align: center;
+
+    /* font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Ubuntu', sans-serif; */
+
 }
 
 .home{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 0px;
+    padding-top: 0px;
+    width: 90%;
+    height: 100%;
 }
 
-.homeTitle {
-    margin-top: 75px;
-    margin-bottom: 50px;
-    font-size: 76px;
-    color: #0ccac4;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.general{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
+
+.filters{
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    padding-right: 15px;
+    padding-left: 15px;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    
+}
+
+.filters h1{
+    
+}
+
+.group{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;
+    align-items: center;
+
+}
+
+.group label{
+    padding-right: 15px;
+    width: 110px;
+    text-align: left;
+    font-size: medium ;
+}
+
+.group select{
+    width: 100px;
+    border-radius: 5px;
+    background-color: beige;
+}
+.filters button {
+    width: 120px;
+    height: 30px;
+    font-size: medium;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: beige;
+}
+
+.filters button:hover{
+    scale: 1.1;
+}
+
+.showing{
+    width: 100%;
+    margin-left: 260px;
+    padding-top: 20px;
+    padding-left: 15px;
+    
+}
+
+

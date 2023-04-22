@@ -5,6 +5,7 @@ import { validation } from './validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTemperaments, addDog} from '../../components/redux/actions';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
 
 function Create(){
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Create(){
     const allTemperaments = useSelector((state)=>state.temperaments)
     
 
-    const disabled = (<button type="submit" disabled>Create!</button>)
+    const disabled = (<button className={styles.submit} type="submit" disabled>Create!</button>)
 
     const [input, setInput]=useState({
         name: '',
@@ -27,8 +28,9 @@ function Create(){
         weight_max: 0,
         life_span_min: 0,
         life_span_max: 0,
-        image: '',
-        temperaments: []
+        image: 0,
+        temperaments: [],
+        temperamentsName: "",
     })
     const [errors, setErrors]=useState({
         name: ' ',
@@ -83,11 +85,18 @@ function Create(){
     const handleSelect = (event) => {
         const selectedOptions = Array.from(event.target.selectedOptions);
         
-        const selectedValues = selectedOptions.map(option => Number(option.value));
-        //console.log(selectedValues);
+        // console.log(selectedOptions);
+        
+        const selectedValues = selectedOptions.map(option => Number(option.value))
+        const selectedNames = selectedOptions.map(option => option.title);
+        
+        // console.log(selectedNames);
+        // console.log(selectedValues);
+
         setInput({
             ...input,
-            [event.target.name]: selectedValues
+            [event.target.name]: selectedValues,
+            temperamentsName: selectedNames.join(", ")
         })
         setErrors(validation({
             ...input,
@@ -100,60 +109,89 @@ function Create(){
   
     return (
         <div>
-            <p>Create Page</p>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Breed Name: </label>
-                    <input name="name" value={input.value} onChange={handleChange}/>
-                    <span>{errors.name}</span>
+            <Navbar />
+            <div className={styles.container}>
+                <div className={styles.cardContainer}>
+                    <h2 className={styles.title}>{input.name.toUpperCase()}</h2>
+                    <div className={styles.description}>
+                        <div className={styles.imageContainer}>
+                            { input.image && !errors.image ? <img className={styles.image} src={input.image} alt='img' />
+                              : (<img className={styles.image} src={require("../../images/incognito-dog.png")} alt='img' />)
+
+                            }
+                        </div>
+                        <p>Weight: {input.weight_min ? `${input.weight_min}` : null}
+                                   {input.weight_max ? ` - ${input.weight_max} kg` : null }</p>
+                        <p>Height: {input.height_min ? `${input.height_min}` : null}
+                                   {input.height_max ? ` - ${input.height_max} cm` : null}</p>
+                        <p>Life Span: {input.life_span_min ? `${input.life_span_min}` : null}
+                                   {input.life_span_max ? ` - ${input.life_span_max} years` : null}</p>    
+                        <p>Temperaments: {input.temperamentsName} </p>
+                    </div> 
                 </div>
-                <div>
-                    <label>Weight: min: </label>
-                    <input name="weight_min" value={input.value} onChange={handleChange}/>
-                    <span>{errors.weight_min}</span>
-                    <label>max: </label>
-                    <input name="weight_max" value={input.value} onChange={handleChange}/>
-                    <span>{errors.weight_max}</span>
-                </div>
-                <div>
-                    <label>Height: min: </label>
-                    <input name="height_min" value={input.value} onChange={handleChange}/>
-                    <label>max: </label>
-                    <span>{errors.height_min}</span>
-                    <input name="height_max" value={input.value} onChange={handleChange}/>
-                    <span>{errors.height_max}</span>
+                <div className={styles.form}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={styles.dataSingle}>
+                            <label>Breed Name</label><br/>
+                            <input className={styles.soloInput} name="name" value={input.value} onChange={handleChange}/><br/>
+                            <p className={styles.error}>{errors.name ? errors.name : null}</p>
+                        </div>
+                        <div className={styles.dataDouble}>
+                            <label>Weight (kg)</label><br/>
+                            <input className={styles.doubleInputLeft} placeholder='min' name="weight_min" value={input.value} onChange={handleChange}/>
+                            <input className={styles.doubleInputRight} placeholder='max' name="weight_max" value={input.value} onChange={handleChange}/><br/>
+                            <div className={styles.errorContainer}>
+                                <div className={styles.errorsLeft}>{errors.weight_min}</div>
+                                <div className={styles.errorsRight}>{errors.weight_max}</div>
+                            </div>
+                        </div>
+
+                        <div className={styles.dataDouble}>
+                            <label>Height (cm)</label><br/>
+                            <input className={styles.doubleInputLeft} placeholder='min' name="height_min" value={input.value} onChange={handleChange}/>
+                            <input className={styles.doubleInputRight} placeholder='max' name="height_max" value={input.value} onChange={handleChange}/><br/>
+                            <div className={styles.errorContainer}>
+                                <div className={styles.errorsLeft}>{errors.height_min}</div>
+                                <div className={styles.errorsRight}>{errors.height_max}</div>
+                            </div>
+                        </div>
+
+                        <div className={styles.dataDouble}>
+                            <label>Life Span (years)</label><br/>
+                            <input className={styles.doubleInputLeft} placeholder='min' name="life_span_min" value={input.value} onChange={handleChange}/>
+                            <input className={styles.doubleInputRight} placeholder='max' name="life_span_max" value={input.value} onChange={handleChange}/><br/>
+                            <div className={styles.errorContainer}>
+                                <div className={styles.errorsLeft}>{errors.life_span_min}</div>
+                                <div className={styles.errorsRight}>{errors.life_span_max}</div>
+                            </div>
+                        </div>
+                        
+                        <div className={styles.dataSingle}>
+                            <label>Image</label><br/>
+                            <input className={styles.soloInput} name="image" value={input.value} onChange={handleChange}/><br/>
+                            <p className={styles.error}>{errors.image ? errors.image : null}</p>
+                        </div>
+
+                        <div className={styles.tempDiv}>
+                            <label>Temperaments: </label><br/>
+                            <span className={styles.tempSpan}>(hold down Ctrl or Cmd button to select multiple options)</span><br/>
+                            <select className={styles.tempSelect} name="temperaments" onChange={handleSelect} multiple={true}>
+                                {
+                                    allTemperaments.map(temp=>{
+                                        return (
+                                            <option title={temp.name} value={temp.id} key={temp.id}>{temp.name}</option>
+                                        )
+                                    })
+                                }
+                            </select><br/>
+                            <p className={styles.error}>{errors.temperaments}</p>
+                        </div>
+                        { errors.name ? disabled : ( errors.height_max ? disabled : ( errors.height_min ? disabled : ( errors.weight_min ? disabled : ( errors.weight_max ? disabled : ( errors.life_span_min ? disabled : ( errors.life_span_max ? disabled : ( errors.temperaments ? disabled : ( errors.image ? disabled : <button className={styles.submit} type="submit">Create!</button>))))))))}
+                    
+                    </form>
 
                 </div>
-                <div>
-                    <label>Life Span: min: </label>
-                    <input name="life_span_min" value={input.value} onChange={handleChange}/>
-                    <span>{errors.life_span_min}</span>
-                    <label>max: </label>
-                    <input name="life_span_max" value={input.value} onChange={handleChange}/>
-                    <span>{errors.life_span_max}</span>
-
-                </div>
-                <div>
-                    <label>Image: </label>
-                    <input name="image" value={input.value} onChange={handleChange}/>
-                    <span>{errors.image}</span>
-                </div>
-                <div>
-                    <label>Temperaments: </label>
-                    <select name="temperaments" onChange={handleSelect} multiple={true}>
-                        {
-                            allTemperaments.map(temp=>{
-                                return (
-                                    <option value={temp.id} key={temp.id}>{temp.name}</option>
-                                )
-                            })
-                        }
-                    </select>
-                    <span>{errors.temperaments}</span>
-                </div>
-                { errors.name ? disabled : ( errors.height_max ? disabled : ( errors.height_min ? disabled : ( errors.weight_min ? disabled : ( errors.weight_max ? disabled : ( errors.life_span_min ? disabled : ( errors.life_span_max ? disabled : ( errors.temperaments ? disabled : ( errors.image ? disabled : <button type="submit">Create!</button>))))))))}
-               
-            </form>
+            </div>
         </div>
     )
 }

@@ -1,25 +1,74 @@
-.cardContainer {
-    display: flex;
-    flex-direction: column;
-    background-color: #95dada;
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 25px;
-    cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 0.25s ease-out;
-    text-align: center;
 
+
+.padContainer{
+    background-image: url("../../images/notepad2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    max-width: 280px;
+    height: 500px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-top: 0px;
+    transition: 0.3s;
+}
+.padContainer:hover{
+    scale: 1.05;
+}
+
+.padTitle {
+    margin-top: 30px;
+    color: #7a695e;
+    
+    
+}
+
+.padDescription{
+    position: relative;
+    margin-top: 20px;
+    padding-top: 20px;
+    
+    
 }
 
 
-.cardContainer:hover {
-    transform: scale(1.05);
+.cinta1{
+    position: absolute;
+    width: 100px;
+    top:1%;
+    left:37%;
 }
 
-.image {
+.cinta2{
+    position: absolute;
+    width: 100px;
+    top:7%;
+    left:61%; 
+    transform: rotate(35deg) 
+}
+
+.padImage {
     width: 200px;
     margin: auto;
+    height: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.padDetail{
+    text-align: left;
+    padding-left: 20px;
+    width: 240px;
+    margin-top: 0px;
+}
+.padSubtitle{
+    margin: 0 0;
+    font-weight: bold;
+    color: rgb(99, 99, 99)
+}
+
+.padData {
+    margin: 3px 0 20px;
 }

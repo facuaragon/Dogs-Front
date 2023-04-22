@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-
-
 
 import { getAllDogs, cleanDetail, getTemperaments, getDogsByName, filterByName, filterByWeight, filterCreatedDog, filterByTemperament, cleanFilters } from "../../components/redux/actions"
 
@@ -20,7 +17,7 @@ function Home(){
     
     const [searchName, setSearchName] = useState('');
 
-    const [order, setOrder] = useState("")
+
 
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -53,7 +50,6 @@ function Home(){
     const handleChange = (event) => {
         event.preventDefault();
         setSearchName(event.target.value)
-        //console.log(searchName);
     }
 
     const handleKeyDown = (event) => {
@@ -65,70 +61,82 @@ function Home(){
     const handlerFilterName = (event) => {
         dispatch(filterByName(event.target.value))
         setCurrentPage(1)
-        setOrder(`Ordered ${event.target.value}`)
     }
 
     const handlerFilterWeight = (event) => {
         dispatch(filterByWeight(event.target.value))
         setCurrentPage(1)
-        setOrder(`Ordered ${event.target.value}`)
         
     }
 
     function handlerFilterCreated (event) {
         dispatch(filterCreatedDog(event.target.value))
         setCurrentPage(1)
-        setOrder(`Ordered ${event.target.value}`)
     }
 
     function handlerFilterTemperament (event) {
         event.preventDefault();
         dispatch(filterByTemperament(event.target.value))
         setCurrentPage(1)
-        setOrder(`Ordered ${event.target.value}`)
     }
 
     function handlerFilters () {
         dispatch(cleanFilters())
         setCurrentPage(1)
-        setOrder('Clean Filters')
     }
 
     return (
         <div className={styles.home}>
-            <h2 className={styles.homeTitle}>Home Page</h2>
             <Navbar handleChange={handleChange} handleSubmit={handleSubmit} handleKeyDown={handleKeyDown} />
-            <Link to="/create">
-                <button>Create a new Dog!</button>
-            </Link>
-            <label>Sort by name: </label>
-            <select  onChange={event => handlerFilterName(event)}>
-                <option key={1} value='A-Z'>A-Z</option>
-                <option key={2} value='Z-A'>Z-A</option>
-            </select>
-            <label>Sort by weight: </label>
-            <select  onChange={event => handlerFilterWeight(event)}>
-                <option key={1} value="max_weight">Max</option>
-                <option key={2} value="min_weight">Min</option>
-            </select>
-            <label>Sort by Created: </label>
-            <select  onChange={event => handlerFilterCreated(event)}>
-                <option key={1} value="all">All</option>
-                <option key={2} value="Created By Users">Created By Users</option>
-                <option key={3} value="The API Dog">The API Dog</option>
-            </select>
-            <label>Sort by Temperament: </label>
-            <select onChange={event => handlerFilterTemperament(event)}>
-                <option key={0} value='All'>All</option>
-                {
-                    allTemperaments.map(temp => (
-                        <option value={temp.name} key={temp.id}>{temp.name}</option>
-                    ))
-                }
-            </select>
-            <button onClick={()=>handlerFilters()}>Clean filters</button>
-            <Cards dogs={currentDogs} loading={loading}  />
-            <Pagination dogsPerPage={dogsPerPage} totalDogs={allDogs.length} paginate={paginate} />
+            <div className={styles.general}>
+                <div className={styles.filters}>
+                    <h3>Sorty By:</h3>
+
+                    <div className={styles.group}>
+                        <label>Alphabetically: </label>
+                        <select  onChange={event => handlerFilterName(event)}>
+                            <option key={1} value='A-Z'>A-Z</option>
+                            <option key={2} value='Z-A'>Z-A</option>
+                        </select>
+                    </div>
+                    <div className={styles.group}>
+                        <label>Dogs Weight: </label>
+                        <select  onChange={event => handlerFilterWeight(event)}>
+                            <option key={1} value="max_weight">Max</option>
+                            <option key={2} value="min_weight">Min</option>
+                        </select>
+                    </div>
+                    <div className={styles.group}>
+                        <label>Created By: </label>
+                        <select  onChange={event => handlerFilterCreated(event)}>
+                            <option key={1} value="all">All</option>
+                            <option key={2} value="Created By Users">By Users</option>
+                            <option key={3} value="The API Dog">API Dog</option>
+                        </select>
+                    </div>
+                    <div className={styles.group}>
+                        <label>Temperament: </label>
+                        <select onChange={event => handlerFilterTemperament(event)}>
+                            <option key={0} value='All'>All</option>
+                            {
+                                allTemperaments.map(temp => (
+                                    <option value={temp.name} key={temp.id}>{temp.name}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <button onClick={()=>handlerFilters()}>Clean filters</button>
+                </div>
+                <div className={styles.showing}>
+                    <div className={styles.cards}>
+                        <Cards dogs={currentDogs} loading={loading}  />
+                    </div>
+                    <div className={styles.pagination}>
+                        <Pagination dogsPerPage={dogsPerPage} totalDogs={allDogs.length} paginate={paginate} />
+                    </div>    
+                </div>
+
+            </div>
 
         </div>
     )

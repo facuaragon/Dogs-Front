@@ -93,8 +93,8 @@ export const validation = (input) =>{
     if(!input.image){
         errors.image = "Must be given"
     }
-    if(!/\.(jpe?g|png|gif|bmp)$/i.test(input.image) && !/^(ftp|http|https):\/\/[^ "]+$/ig.test(input.image)){
-        errors.image = "Must be an URL or JEPG, PNG, GIF or BNP"
+    if(!/^(ftp|http|https):\/\/[^ "]+$/ig.test(input.image)){
+        errors.image = "Must be an URL image"
     }
 
     //temperaments

@@ -1,9 +1,102 @@
-.searchBox {
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 150px;
-    line-height: 30px;
-    margin-bottom: 30px;
+.nav_container {
+    width: 100%;
+    height: 100%;
+}
+.nav {
+    z-index: 10;
+    padding-bottom: 15px;
+    height: 90px;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #A9907E;
+    margin-bottom: 0;
+    padding: 2rem 0;
+    z-index: 10;
+    width: 100%;
+    box-shadow: -1px 5px 5px 0px rgba(0,0,0,0.25);
+}
+
+.create_button {
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 0.5em;
+    box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: 0.3s;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.create_button:hover {
+    scale: 1.1;
+}
+
+.logo_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    height: 40px;
+}
+
+.logo_container img {
+    height: 70px;
+    width: 70px;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    transition: 0.3s;
+    
+}
+
+.logo_container img:hover {
+    scale: 1.1;
+    
+}
+
+.group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 400px;
+ }
+
+ .input {
+    width: 400px;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 3rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-color: ;
+    box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    font-weight: 400;
+    margin-right: 15px;
+ }
+
+ .search {
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 0.5em;
+    box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: 0.3s;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.search:hover {
+    scale: 1.1;
 }

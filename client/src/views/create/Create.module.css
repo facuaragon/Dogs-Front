@@ -1,0 +1,152 @@
+
+.container{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius:8px;
+    padding: 25px;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    text-align: center;
+    width: 400px;
+    max-width: 400px;
+    margin-left: 50px;
+    margin-top: 60px;
+
+}
+.image {
+    max-height: 250px;
+    width: 200px;
+    margin: auto;
+}
+
+.form{
+    margin-top: 150px;
+    width: 600px;
+    margin-right: 50px;
+    border: 1px solid grey;
+    border-radius: 8px;
+}
+
+.form label {
+    font-weight: 600;
+}
+
+
+.dataSingle{
+    height: 70px;
+}
+.soloInput{
+    width: 205px;
+    border-radius: 5px;
+    text-align: center;
+}
+.error{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+    font-size: smaller;
+    margin-top: 3px;
+}
+
+
+
+.dataDouble{
+    height: 70px;
+    
+}
+.doubleInputLeft{
+    display: inline;
+    border-radius: 5px;
+    width: 80px;
+    margin-right: 20px;
+    
+}
+.doubleInputRight{
+    display: inline;
+    border-radius: 5px;
+    width: 80px;
+    margin-left: 20px;
+    
+}
+.errorContainer{
+    position: relative;
+}
+.errorsLeft{
+    position: absolute;
+    display: inline-block;
+    right: 320px;
+    
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: smaller;
+    padding: 3px;
+    width: fit-content;
+    
+}
+.errorsRight{
+    position: absolute;
+    display: inline-block;
+    left: 320px;
+    justify-content: center;
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: smaller;
+    padding: 3px;
+    width: fit-content;
+    
+}
+.errors{
+    display: inline;
+    justify-content: center;
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: smaller;
+    padding: 10px;
+    width: fit-content;
+    
+}
+
+.tempDiv{
+    height: 160px;
+    text-align: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.tempSpan{
+    display: block;
+    scale: 0.7;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+.tempSelect{
+    display: block;
+    margin-left: 225px;
+    padding-top: 0;
+    width: 150px;
+    height: 55px;
+}
+
+.submit {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 0.5em;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.55);
+    cursor: pointer;
+    transition: 0.3s;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+}

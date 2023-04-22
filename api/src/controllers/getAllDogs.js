@@ -20,6 +20,7 @@ const getApi = async () => {
             weight: dog.weight.metric,
             height: dog.height.metric,
             life_span: dog.life_span,
+            origin: dog.origin,
             image: dog.image.url,
         }
     })
