@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS } from "./action-types"
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS } from "./action-types"
 
 const initialState = {
     allDogs: [],
@@ -105,7 +105,12 @@ const rootReducer = (state=initialState, action) =>{
                 dogsCopy: [...state.dogsCopy, action.payload],
                 dogsFiltered: [...state.dogsCopy, action.payload],
             }
-    
+            
+        case CLEAN_DOGS:
+            return {
+                ...state,
+                allDogs: [],
+            }
         default:
             return {...state}
     }

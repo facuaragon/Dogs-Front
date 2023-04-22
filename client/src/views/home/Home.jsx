@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getAllDogs, cleanDetail, getTemperaments, getDogsByName, filterByName, filterByWeight, filterCreatedDog, filterByTemperament, cleanFilters } from "../../components/redux/actions"
+import { getAllDogs, cleanDetail, getTemperaments, getDogsByName, filterByName, filterByWeight, filterCreatedDog, filterByTemperament, cleanFilters, cleanDogs } from "../../components/redux/actions"
 
 import styles from './Home.module.css'
 import Navbar from "../../components/Navbar/Navbar"
@@ -37,6 +37,7 @@ function Home(){
         setLoading(false);
         return ( () => {
             dispatch(cleanDetail());
+            dispatch(cleanDogs());
         } )
     }, [dispatch] );
 

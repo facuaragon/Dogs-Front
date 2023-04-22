@@ -53,7 +53,6 @@ function Create(){
             ...input,
             [event.target.name]: event.target.value
         }))
-        // console.log(errors);
     }
 
     const handleSubmit = async (event) => {
@@ -71,7 +70,6 @@ function Create(){
         const response = await axios.post("http://localhost:3001/dogs/", newDog)
         const dogCreated = response.data;
         
-        console.log(dogCreated);
 
         if(dogCreated.error){
             alert("The breeds name already exists")
@@ -85,13 +83,11 @@ function Create(){
     const handleSelect = (event) => {
         const selectedOptions = Array.from(event.target.selectedOptions);
         
-        // console.log(selectedOptions);
+      
         
         const selectedValues = selectedOptions.map(option => Number(option.value))
         const selectedNames = selectedOptions.map(option => option.title);
         
-        // console.log(selectedNames);
-        // console.log(selectedValues);
 
         setInput({
             ...input,
