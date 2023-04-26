@@ -3,44 +3,54 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
   }
   
   .backgroundImage {
-    position: absolute;
+    margin: auto auto;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../images/dogs-image-placeholder-copia.jpg');
+    width: 75%;
+    height: 90%;
+    background-image: url('../../images/placeholder.png');
     background-size: cover;
     background-position: center;
     z-index: -1;
   }
-  
+  .group{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background-color: RGBA(0,0,0,0.3);
+    width: 600px;
+  }
   .title {
     font-size: 36px;
     font-weight: bold;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 10px;
     color: rgb(52, 14, 14);
   }
   
   .button {
-    display: block;
-    width: 200px;
-    height: 50px;
-    margin: 0 auto;
-    margin-top: 50px;
-    text-align: center;
-    line-height: 50px;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background-color: #6b7341;
-    border-radius: 25px;
-    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 49%;
+    left: 52%;
+    
+    cursor: pointer;
   }
   .button:hover {
-    scale: 1.05;
+    scale: 1.5;
     transition: 0.25s;
   }
+
+  .logo{
+    border: none;
+    width: 180px;
+  }
+  

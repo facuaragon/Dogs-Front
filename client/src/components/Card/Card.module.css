@@ -21,13 +21,16 @@
 .padTitle {
     margin-top: 30px;
     color: #7a695e;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: xx-large;
+    margin-bottom: 5px;
     
     
 }
 
 .padDescription{
     position: relative;
-    margin-top: 20px;
+    margin-top: 10px;
     padding-top: 20px;
     
     
@@ -61,12 +64,15 @@
     text-align: left;
     padding-left: 20px;
     width: 240px;
-    margin-top: 0px;
+    margin-top: 8px;
+    font-size: 14px;
+
+    
 }
 .padSubtitle{
     margin: 0 0;
     font-weight: bold;
-    color: rgb(99, 99, 99)
+    color: rgb(99, 99, 99);
 }
 
 .padData {

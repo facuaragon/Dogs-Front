@@ -1,21 +1,19 @@
 .nav_container {
     width: 100%;
-    height: 70px;
-    margin-bottom: 10px;
+    height: 90px;
+    margin-bottom: 20px;
 }
 .nav {
     z-index: 10;
     padding-bottom: 15px;
-    height: 70px;
+    height: 90px;
     width: 100%;
     margin-bottom: 10px;
 }
 
 .navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    display: relative;
+    
     position: fixed;
     top: 0;
     left: 0;
@@ -25,7 +23,7 @@
     z-index: 10;
     width: 100%;
     box-shadow: -1px 5px 5px 0px rgba(0,0,0,0.25);
-    height: 60px;
+    height: 90px;
 }
 
 .create_button {
@@ -44,33 +42,61 @@
 }
 
 .logo_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    position: relative;
-    height: 40px;
+    position: absolute;
+    left: 2%
+    
 }
 
 .logo_container img {
-    height: 70px;
-    width: 70px;
-    border-radius: 15px;
-    box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    height: 90px;
+    width: 220px;
     transition: 0.3s;
     
 }
 
-.logo_container img:hover {
+.logo_container1 {
+    position: absolute;
+    left: 18%
+    
+}
+
+.logo_container1 img {
+    height: 90px;
+    width: 90px;
+    transition: 0.3s;
+    
+}
+
+.logo_container1 img:hover {
+    scale: 1.1;
+    
+}
+
+.logo_container2 {
+    position: absolute;
+    left: 55%;
+   
+}
+
+.logo_container2 img {
+    height: 90px;
+    width: 90px;
+    transition: 0.3s;
+    
+}
+
+.logo_container2 img:hover {
     scale: 1.1;
     
 }
 
 .group{
+    position: absolute;
+    left: 65%;
+    bottom: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     max-width: 400px;
  }
 
@@ -81,7 +107,6 @@
     padding: 0 3rem;
     border: 2px solid transparent;
     border-radius: 8px;
-    background-color: ;
     box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
@@ -94,6 +119,8 @@
     font-size: 20px;
     border-radius: 0.5em;
     box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.55);
+    background-image: url("../../images/search-button.png");
+
     cursor: pointer;
     transition: 0.3s;
     font-family:Arial, Helvetica, sans-serif;
@@ -102,4 +129,23 @@
 
 .search:hover {
     scale: 1.1;
+}
+
+.logo_container3 {
+
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+   transition: 0.3s;
+
+}
+.logo_container3:hover {
+    scale: 1.1;
+}
+
+.logo_container3 img {
+    width: 170px;
+    border-radius: 15px;
+    transition: 0.3s;
+    
 }

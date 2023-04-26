@@ -30,7 +30,7 @@ router.get("/dogs", async ( req, res ) => {
             return res.status(201).json(allDogs)
         }
     } catch (error) {
-        return res.status(404).send({error: "No matches for these name"});
+        return res.status(404).send({error: "No matches for this name"});
     }
 })
 

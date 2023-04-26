@@ -32,7 +32,7 @@ function Detail(){
                 <div className={styles.padContainer}>
                     {name ? (
                         <>
-                            <h2 className={styles.padTitle}>{name.toUpperCase()}</h2>
+                            <h2 className={styles.padTitle}>{name}</h2>
                             <div className={styles.padDescription}>
                                 <img className={cinta === 1 ? styles.cinta1 : (cinta===2 ? styles.cinta2 : styles.cinta1)} src={require(`../../images/cinta${cintaImage}.png`)} alt="cinta"/>
                                 <div className={styles.imageContainer}>

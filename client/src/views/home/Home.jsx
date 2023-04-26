@@ -15,10 +15,6 @@ function Home(){
     const allDogs = useSelector((state)=>state.allDogs);
     const allTemperaments = useSelector((state)=>state.temperaments);
     
-    const [searchName, setSearchName] = useState('');
-
-
-
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage] = useState(8);
@@ -32,6 +28,7 @@ function Home(){
 
     useEffect(()=>{
         setLoading(true);
+
         dispatch( getAllDogs() );
         dispatch( getTemperaments() )
         setLoading(false);
@@ -41,57 +38,46 @@ function Home(){
         } )
     }, [dispatch] );
 
-    const handleSubmit = (event)=>{
-        event.preventDefault();
-        setCurrentPage(1);
-        dispatch(getDogsByName(searchName));
-        setSearchName("");
-    }
 
-    const handleChange = (event) => {
-        event.preventDefault();
-        setSearchName(event.target.value)
-    }
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            handleSubmit(event);
-        }
-    }
 
     const handlerFilterName = (event) => {
+        dispatch(cleanDogs());
         dispatch(filterByName(event.target.value))
         setCurrentPage(1)
     }
 
     const handlerFilterWeight = (event) => {
+        dispatch(cleanDogs());
         dispatch(filterByWeight(event.target.value))
         setCurrentPage(1)
         
     }
 
     function handlerFilterCreated (event) {
+        dispatch(cleanDogs());
         dispatch(filterCreatedDog(event.target.value))
         setCurrentPage(1)
     }
 
     function handlerFilterTemperament (event) {
         event.preventDefault();
+        dispatch(cleanDogs());
         dispatch(filterByTemperament(event.target.value))
         setCurrentPage(1)
     }
 
     function handlerFilters () {
+        dispatch(cleanDogs());
         dispatch(cleanFilters())
         setCurrentPage(1)
     }
 
     return (
         <div className={styles.home}>
-            <Navbar handleChange={handleChange} handleSubmit={handleSubmit} handleKeyDown={handleKeyDown} />
+            <Navbar paginate={paginate}/>
             <div className={styles.general}>
                 <div className={styles.filters}>
-                    <h3>Sorty By:</h3>
+                    <h3 className={styles.sortTitle}>SORT BY:</h3>
 
                     <div className={styles.group}>
                         <label>Alphabetically: </label>
@@ -126,8 +112,10 @@ function Home(){
                             }
                         </select>
                     </div>
-                    <button onClick={()=>handlerFilters()}>Clean filters</button>
                 </div>
+                <button type="submit" onClick={()=>handlerFilters()} className={styles.button_container}>
+                        <img src={require("../../images/clean-button.png")} alt="clean" className={styles.button}  />
+                </button>
                 <div className={styles.showing}>
                     <div className={styles.cards}>
                         <Cards dogs={currentDogs} loading={loading}  />

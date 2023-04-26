@@ -28,57 +28,62 @@ body{
     width: 100%;
 }
 
+.sortTitle {
+    
+    margin-top: 40px;
+    color: black;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: xx-large;
+    margin-bottom: 5px;
+    margin-right: 100px;
+    
+}
+
 .filters{
+    background-image: url("../../images/POSTIT2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    max-width: 250px;
-    padding-right: 15px;
+    max-width: 270px;
+    padding-right: 38px;
     padding-left: 15px;
+    padding-bottom: 60px;
     position: fixed;
     justify-content: center;
     align-items: center;
     margin-left: 15px;
-    
-}
+    margin-top: 10px;
 
-.filters h1{
     
 }
 
 .group{
     display: flex;
     flex-direction: row;
-    padding-bottom: 15px;
+    padding-bottom: 7px;
     align-items: center;
 
 }
 
 .group label{
-    padding-right: 15px;
-    width: 110px;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: larger;
+    padding-right: 0px;
+    width: 100px;
     text-align: left;
-    font-size: medium ;
+    
 }
 
 .group select{
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: larger;
     width: 100px;
     border-radius: 5px;
     background-color: beige;
-}
-.filters button {
-    width: 120px;
-    height: 30px;
-    font-size: medium;
-    border-radius: 8px;
-    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.55);
-    cursor: pointer;
-    transition: 0.3s;
-    background-color: beige;
+    
 }
 
-.filters button:hover{
-    scale: 1.1;
-}
 
 .showing{
     width: 100%;
@@ -89,3 +94,23 @@ body{
 }
 
 
+.button_container {
+    position: fixed;
+    margin-top: 230px;
+    margin-left: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100px;
+    padding: 0;
+ 
+ }
+ 
+ .button_container:hover {
+    scale: 1.1;
+ }
+
+ .button{
+    width: 120px;
+ }

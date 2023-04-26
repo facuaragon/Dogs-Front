@@ -1,11 +1,12 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS } from "./action-types"
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS, ERRORS, CLEAN_ERRORS } from "./action-types"
 
 const initialState = {
     allDogs: [],
     dogsCopy: [],
     dogsFiltered: [],
     temperaments: [],
-    dogDetail: {}
+    dogDetail: {},
+    errors: ""
 };
 
 const rootReducer = (state=initialState, action) =>{  
@@ -45,12 +46,13 @@ const rootReducer = (state=initialState, action) =>{
             }
 
         case FILTER_BY_NAME:
-            const filteredDogs = action.payload === "A-Z" ? state.allDogs.sort((a,b)=>{
+            const managedDogs = state.dogsFiltered
+            const filteredDogs = action.payload === "A-Z" ? managedDogs.sort((a,b)=>{
                 if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
                 if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
                 return 0
             })
-            : state.allDogs.sort((a,b)=>{
+            : managedDogs.sort((a,b)=>{
                 if(a.name.toLowerCase() > b.name.toLowerCase()) return -1;
                 if(a.name.toLowerCase() < b.name.toLowerCase()) return 1;
                 return 0
@@ -58,7 +60,6 @@ const rootReducer = (state=initialState, action) =>{
             return {
                 ...state,
                 allDogs: filteredDogs,
-                dogsFiltered: filteredDogs,
             }
 
         case FILTER_BY_WEIGHT:
@@ -66,8 +67,8 @@ const rootReducer = (state=initialState, action) =>{
                 return Number(a.weight.split(" - ")[0]) - Number(b.weight.split(" - ")[0])
             })  :
             state.dogsFiltered.sort((a,b) =>{
-            return Number(a.weight.split(" - ")[1]) - Number(b.weight.split(" - ")[1])
-            }).reverse()
+            return (Number(a.weight.split(" - ")[1]) - Number(b.weight.split(" - ")[1]))
+            }).reverse();
             
             return {
             ...state,
@@ -95,21 +96,31 @@ const rootReducer = (state=initialState, action) =>{
             return {
                 ...state,
                 allDogs: state.dogsCopy,
-                filteredDogs: state.dogsCopy
+                dogsFiltered: state.dogsCopy
             }
 
-        case ADD_DOG:
-            return {
-                ...state,
-                allDogs: [...state.dogsCopy, action.payload],
-                dogsCopy: [...state.dogsCopy, action.payload],
-                dogsFiltered: [...state.dogsCopy, action.payload],
-            }
+        // case ADD_DOG:
+        //     return {
+        //         ...state,
+        //         // allDogs: [...state.dogsCopy, action.payload],
+        //         dogsCopy: [...state.dogsCopy, action.payload],
+        //         // dogsFiltered: [...state.dogsCopy, action.payload],
+        //     }
             
         case CLEAN_DOGS:
             return {
                 ...state,
                 allDogs: [],
+            }
+        case ERRORS:
+            return {
+                ...state,
+                errors: action.payload
+            }
+        case CLEAN_ERRORS:
+            return {
+                ...state,
+                errors: ""
             }
         default:
             return {...state}

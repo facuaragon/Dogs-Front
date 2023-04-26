@@ -17,9 +17,12 @@
 }
 
 .padTitle {
-    margin-top: 30px;
+    width: 310px;
+    margin: 30px auto auto auto;
     color: #7a695e;
-    
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: xx-large;
+    scale: 1.4;   
     
 }
 
@@ -60,6 +63,7 @@
     padding-left: 20px;
     width: 400px;
     margin-top: 0px;
+    font-size: 15px;
 }
 .padSubtitle{
     margin: 0 0;

@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS } from "./action-types"
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS, ERRORS, CLEAN_ERRORS } from "./action-types"
 import axios from "axios";
 
 export const getAllDogs = () =>{
@@ -20,9 +20,11 @@ export const cleanDetail = () =>{
 }
 
 export const getDogsByName = (name) =>{
-    return async function(dispatch){
-        const response = await axios.get(`http://localhost:3001/dogs/?name=${name}`);
-        dispatch({type: GET_DOGS_BY_NAME, payload: response.data})
+    return function(dispatch){
+        axios.get(`http://localhost:3001/dogs/?name=${name}`)
+        .then(response => {return dispatch({type: GET_DOGS_BY_NAME, payload: response.data})})
+        .catch(error => {
+            alert(error.response.data.error)})
     }
 }
 
@@ -61,4 +63,8 @@ export const cleanFilters = () => {
 
 export const cleanDogs = () => {
     return {type: CLEAN_DOGS}
+}
+
+export const cleanErrors = () =>{
+    return {type: CLEAN_ERRORS}
 }

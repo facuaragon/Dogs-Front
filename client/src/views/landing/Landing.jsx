@@ -5,10 +5,11 @@ function Landing(){
     return (
         <div className={styles.landingPage}>
             <div className={styles.backgroundImage}></div>
-            <h1 className={styles.title}>Título de la Landing Page</h1>
-            <Link to="/home">
-                    <button className={styles.button}>Try It!</button>
-            </Link>
+            <button className={styles.button}>
+                <Link to="/home">
+                    <img src={require("../../images/TRYIT.png")} alt="create" className={styles.logo} />
+                </Link>
+                </button>
         </div>
     )
 }

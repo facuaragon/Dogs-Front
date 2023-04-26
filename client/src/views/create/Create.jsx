@@ -75,7 +75,6 @@ function Create(){
             alert("The breeds name already exists")
         }
         else{
-            dispatch(addDog(dogCreated));
             navigate(`/home/${dogCreated.id}`);
         }     
     }
