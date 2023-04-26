@@ -44,7 +44,7 @@ export const validation = (input) =>{
         errors.weight_min=  "Must be given";
     }
     if(input.weight_min <= 0){
-        errors.weight_min=  "Minimun must be higher";
+        errors.weight_min=  "Must be higher";
     }
 
     // max weight
@@ -55,7 +55,7 @@ export const validation = (input) =>{
         errors.weight_max= "Must be given";
     }
     if(input.weight_max <= 0){
-        errors.weight_max= "Minimun must be higher";
+        errors.weight_max= "Must be higher";
     }
     if(input.weight_max <= input.weight_min){
         errors.weight_max= "Maximum must be higher than minimun";
@@ -72,7 +72,7 @@ export const validation = (input) =>{
     if(input.life_span_min <= 0){
         errors.life_span_min= "Must be higher";
     }
-    // setErrors({...errors, life_span_min: ""});
+   
 
     //max life span
     if(!/^[0-9]*$/.test(input.life_span_max)){
