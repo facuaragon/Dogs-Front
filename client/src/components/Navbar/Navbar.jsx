@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
-import { getDogsByName, cleanErrors } from '../redux/actions';
+import { useDispatch } from 'react-redux'
+import { getDogsByName } from '../redux/actions';
 import { useState } from 'react';
 
 function Navbar({paginate}){
@@ -38,13 +38,11 @@ function Navbar({paginate}){
                 <div className={styles.logo_container}>
                         <img src={require("../../images/LOGO.png")} alt="home" className={styles.logo} />
                     </div>
-                    { pathname === "/home" ? null :
-                        <div className={styles.logo_container1}>
-                            <Link to={"/home"}>
-                                <img src={require("../../images/home-button.png")} alt="home" className={styles.logo} />
-                            </Link>
-                        </div>
-                    }
+                    <div className={styles.logo_container1}>
+                        <Link to={"/home"}>
+                            <img src={require("../../images/home-button.png")} alt="home" className={styles.logo} />
+                        </Link>
+                    </div>
                     <div className={styles.logo_container2}>
                         { pathname ==="/create" ? null :
                             <Link to={'/create'}>

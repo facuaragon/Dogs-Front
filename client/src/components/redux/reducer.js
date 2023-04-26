@@ -1,4 +1,5 @@
-import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, ADD_DOG, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS, ERRORS, CLEAN_ERRORS } from "./action-types"
+
+import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS, ERRORS, CLEAN_ERRORS } from "./action-types"
 
 const initialState = {
     allDogs: [],
@@ -63,13 +64,29 @@ const rootReducer = (state=initialState, action) =>{
             }
 
         case FILTER_BY_WEIGHT:
-            const filteredWeight = action.payload === 'min_weight' ? state.dogsFiltered.sort((a, b) => {
-                return Number(a.weight.split(" - ")[0]) - Number(b.weight.split(" - ")[0])
-            })  :
-            state.dogsFiltered.sort((a,b) =>{
-            return (Number(a.weight.split(" - ")[1]) - Number(b.weight.split(" - ")[1]))
-            }).reverse();
-            
+            let weights = state.dogsFiltered.map((dog)=>{
+                let min= dog.weight.split(" - ")[0];
+                if(min === "NaN" || !min ) min = 100;
+                let max= dog.weight.split(" - ")[1];
+                if(max === "NaN" || !max ) max = 1;
+                return {
+                    ...dog,
+                    min_weight: Number(min),
+                    max_weight: Number(max)
+                }
+            })
+            const filteredWeight = action.payload === 'min_weight' ? weights.sort((a, b) => {
+                    if(isNaN(a.min_weight) || isNaN(b.min_weight)) return 1
+                    if(a.min_weight > b.min_weight) return 1;
+                    if(a.min_weight < b.min_weight) return -1;
+                    return 0
+                })  :
+                weights.sort((a,b) =>{
+                    if(isNaN(a.max_weight) || isNaN(b.max_weight)) return 1
+                    if(b.max_weight > a.max_weight) return 1;
+                    if(b.max_weight < a.max_weight) return -1;
+                    return 0
+                }); 
             return {
             ...state,
             allDogs: filteredWeight,
@@ -97,16 +114,7 @@ const rootReducer = (state=initialState, action) =>{
                 ...state,
                 allDogs: state.dogsCopy,
                 dogsFiltered: state.dogsCopy
-            }
-
-        // case ADD_DOG:
-        //     return {
-        //         ...state,
-        //         // allDogs: [...state.dogsCopy, action.payload],
-        //         dogsCopy: [...state.dogsCopy, action.payload],
-        //         // dogsFiltered: [...state.dogsCopy, action.payload],
-        //     }
-            
+            }            
         case CLEAN_DOGS:
             return {
                 ...state,
@@ -120,7 +128,7 @@ const rootReducer = (state=initialState, action) =>{
         case CLEAN_ERRORS:
             return {
                 ...state,
-                errors: ""
+                errors: "",
             }
         default:
             return {...state}

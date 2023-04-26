@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Pagination.module.css"
 
-const Paginas = ({dogsPerPage, totalDogs, paginate}) => {
+const Paginas = ({dogsPerPage, totalDogs, paginate, currentPage}) => {
     let pageNumbers = [];
 
     for (let i=1; i<= Math.ceil(totalDogs/dogsPerPage); i++){
@@ -10,7 +10,6 @@ const Paginas = ({dogsPerPage, totalDogs, paginate}) => {
 
     if(pageNumbers.length===1) pageNumbers=[];
 
-
     return (
         <nav >
             <ul className={styles.list}>
@@ -18,7 +17,7 @@ const Paginas = ({dogsPerPage, totalDogs, paginate}) => {
                     pageNumbers?.map(page=>{
                         return (
                             <li key={page}>
-                                <button onClick={()=>paginate(page)}>{page}</button>
+                                <button onClick={()=>paginate(page)} className={ currentPage===page ? styles.here : null} >{page}</button>
                             </li>
                         )
                     })

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getAllDogs, cleanDetail, getTemperaments, getDogsByName, filterByName, filterByWeight, filterCreatedDog, filterByTemperament, cleanFilters, cleanDogs } from "../../components/redux/actions"
+import { getAllDogs, cleanDetail, getTemperaments, filterByName, filterByWeight, filterCreatedDog, filterByTemperament, cleanDogs } from "../../components/redux/actions"
 
 import styles from './Home.module.css'
 import Navbar from "../../components/Navbar/Navbar"
@@ -68,7 +68,7 @@ function Home(){
 
     function handlerFilters () {
         dispatch(cleanDogs());
-        dispatch(cleanFilters())
+        dispatch(getAllDogs())
         setCurrentPage(1)
     }
 
@@ -78,50 +78,55 @@ function Home(){
             <div className={styles.general}>
                 <div className={styles.filters}>
                     <h3 className={styles.sortTitle}>SORT BY:</h3>
-
-                    <div className={styles.group}>
-                        <label>Alphabetically: </label>
-                        <select  onChange={event => handlerFilterName(event)}>
-                            <option key={1} value='A-Z'>A-Z</option>
-                            <option key={2} value='Z-A'>Z-A</option>
-                        </select>
-                    </div>
-                    <div className={styles.group}>
-                        <label>Dogs Weight: </label>
-                        <select  onChange={event => handlerFilterWeight(event)}>
-                            <option key={1} value="max_weight">Max</option>
-                            <option key={2} value="min_weight">Min</option>
-                        </select>
-                    </div>
-                    <div className={styles.group}>
-                        <label>Created By: </label>
-                        <select  onChange={event => handlerFilterCreated(event)}>
-                            <option key={1} value="all">All</option>
-                            <option key={2} value="Created By Users">By Users</option>
-                            <option key={3} value="The API Dog">API Dog</option>
-                        </select>
-                    </div>
-                    <div className={styles.group}>
-                        <label>Temperament: </label>
-                        <select onChange={event => handlerFilterTemperament(event)}>
-                            <option key={0} value='All'>All</option>
-                            {
-                                allTemperaments.map(temp => (
-                                    <option value={temp.name} key={temp.id}>{temp.name}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
+                    <form>
+                        <div className={styles.group}>
+                            <label>Alphabetically: </label>
+                            <select  onChange={event => handlerFilterName(event)}>
+                                <option selected="selected">Select</option>
+                                <option key={1} value='A-Z'>A-Z</option>
+                                <option key={2} value='Z-A'>Z-A</option>
+                            </select>
+                        </div>
+                        <div className={styles.group}>
+                            <label>Dogs Weight: </label>
+                            <select  onChange={event => handlerFilterWeight(event)}>
+                                <option selected="selected">Select</option>
+                                <option key={1} value="max_weight">Max</option>
+                                <option key={2} value="min_weight">Min</option>
+                            </select>
+                        </div>
+                        <div className={styles.group}>
+                            <label>Created By: </label>
+                            <select  onChange={event => handlerFilterCreated(event)}>
+                                <option selected="selected">Select</option>
+                                <option key={1} value="all">All</option>
+                                <option key={2} value="Created By Users">By Users</option>
+                                <option key={3} value="The API Dog">API Dog</option>
+                            </select>
+                        </div>
+                        <div className={styles.group}>
+                            <label>Temperament: </label>
+                            <select onChange={event => handlerFilterTemperament(event)}>
+                                <option selected="selected">Select</option>
+                                <option key={0} value='All'>All</option>
+                                {
+                                    allTemperaments.map(temp => (
+                                        <option value={temp.name} key={temp.id}>{temp.name}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <button type="reset" onClick={()=>handlerFilters()} className={styles.button_container}>
+                                <img src={require("../../images/clean-button.png")} alt="clean" className={styles.button}  />
+                        </button>
+                    </form>
                 </div>
-                <button type="submit" onClick={()=>handlerFilters()} className={styles.button_container}>
-                        <img src={require("../../images/clean-button.png")} alt="clean" className={styles.button}  />
-                </button>
                 <div className={styles.showing}>
                     <div className={styles.cards}>
                         <Cards dogs={currentDogs} loading={loading}  />
                     </div>
                     <div className={styles.pagination}>
-                        <Pagination dogsPerPage={dogsPerPage} totalDogs={allDogs.length} paginate={paginate} />
+                        <Pagination dogsPerPage={dogsPerPage} totalDogs={allDogs.length} paginate={paginate} currentPage={currentPage}/>
                     </div>    
                 </div>
 

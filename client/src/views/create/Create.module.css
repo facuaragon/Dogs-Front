@@ -32,7 +32,7 @@
 }
 
 .form{
-    margin-top: 150px;
+    margin-top: 110px;
     width: 600px;
     margin-right: 50px;
     border: 1px solid grey;
@@ -149,4 +149,73 @@
     font-family:Arial, Helvetica, sans-serif;
     font-weight: 400;
     margin-bottom: 10px;
+}
+.padContainer{
+    background-image: url("../../images/notepad.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 10px 10px 18px 0px rgba(0,0,0,0.75);
+    width: 450px;
+    height: 550px;
+    margin-bottom: 50px;
+    margin-top: 140px;
+}
+
+.padTitle {
+    width: 310px;
+    margin: 30px auto auto auto;
+    color: #7a695e;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: xx-large;
+    scale: 1.4;   
+    
+}
+
+.padDescription{
+    position: relative;
+    margin-top: 20px;
+    padding-top: 20px;
+    
+    
+}
+
+
+.cinta1{
+    position: absolute;
+    width: 100px;
+    top:1%;
+    left:39%;
+}
+
+.cinta2{
+    position: absolute;
+    width: 100px;
+    top:5%;
+    left:57%; 
+    transform: rotate(35deg) 
+}
+
+.padImage {
+    width: 200px;
+    margin: auto;
+    height: 100%;
+    max-height: 170px;
+    border-radius: 8px;
+}
+
+.padDetail{
+    text-align: left;
+    padding-left: 20px;
+    width: 400px;
+    margin-top: 0px;
+    font-size: 15px;
+}
+.padSubtitle{
+    margin: 0 0;
+    font-weight: bold;
+    color: rgb(99, 99, 99)
+}
+
+.padData {
+    margin: 3px 0 20px;
 }

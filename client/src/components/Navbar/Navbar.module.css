@@ -43,7 +43,7 @@
 
 .logo_container {
     position: absolute;
-    left: 2%
+    left: 25px
     
 }
 
@@ -56,7 +56,7 @@
 
 .logo_container1 {
     position: absolute;
-    left: 18%
+    left: 280px;
     
 }
 
@@ -74,7 +74,7 @@
 
 .logo_container2 {
     position: absolute;
-    left: 55%;
+    left: 390px;
    
 }
 
@@ -92,7 +92,7 @@
 
 .group{
     position: absolute;
-    left: 65%;
+    right:  80px;
     bottom: 25%;
     display: flex;
     justify-content: center;

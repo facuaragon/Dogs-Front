@@ -3,7 +3,7 @@ import styles from './Create.module.css'
 import axios from 'axios';
 import { validation } from './validation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTemperaments, addDog} from '../../components/redux/actions';
+import { getTemperaments} from '../../components/redux/actions';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
@@ -43,6 +43,7 @@ function Create(){
         image: '',
         temperaments: ''
     })
+
 
     const handleChange = (event) => {
         setInput({
@@ -106,22 +107,37 @@ function Create(){
         <div>
             <Navbar />
             <div className={styles.container}>
-                <div className={styles.cardContainer}>
-                    <h2 className={styles.title}>{input.name.toUpperCase()}</h2>
-                    <div className={styles.description}>
+                <div className={styles.padContainer}>
+                    <h2 className={styles.padTitle}>{input.name.toUpperCase()}</h2>
+                    <div className={styles.padDescription}>
                         <div className={styles.imageContainer}>
-                            { input.image && !errors.image ? <img className={styles.image} src={input.image} alt='img' />
-                              : (<img className={styles.image} src={require("../../images/incognito-dog.png")} alt='img' />)
-
+                            { input.image && !errors.image ? 
+                                (<>
+                                    <img className={styles.cinta1} src={require(`../../images/cinta2.png`)} alt="cinta"/>
+                                    <img className={styles.padImage} src={input.image} alt='img' />
+                                </>)
+                                : (<img className={styles.padImage} src={require("../../images/dog-unknown.png")} alt='img' />)
                             }
                         </div>
-                        <p>Weight: {input.weight_min ? `${input.weight_min}` : null}
-                                   {input.weight_max ? ` - ${input.weight_max} kg` : null }</p>
-                        <p>Height: {input.height_min ? `${input.height_min}` : null}
-                                   {input.height_max ? ` - ${input.height_max} cm` : null}</p>
-                        <p>Life Span: {input.life_span_min ? `${input.life_span_min}` : null}
-                                   {input.life_span_max ? ` - ${input.life_span_max} years` : null}</p>    
-                        <p>Temperaments: {input.temperamentsName} </p>
+                        <div className={styles.padDetail}>
+                            <p className={styles.padSubtitle}>HEIGHT</p>
+                            <p className={styles.padData}>
+                                {input.height_min ? `${input.height_min}` : null}
+                                {input.height_max ? ` - ${input.height_max} cm` : null}
+                            </p>
+                            <p className={styles.padSubtitle}>Weight</p>
+                            <p className={styles.padData}>
+                                {input.weight_min ? `${input.weight_min}` : null}
+                                {input.weight_max ? ` - ${input.weight_max} kg` : null }
+                            </p>
+                            <p className={styles.padSubtitle}>Life Span</p> 
+                            <p className={styles.padData}>
+                                {input.life_span_min ? `${input.life_span_min}` : null}
+                                    {input.life_span_max ? ` - ${input.life_span_max} years` : null}
+                            </p>
+                            <p className={styles.padSubtitle}>Temperaments</p>
+                            <p className={styles.padData}>{input.temperamentsName} </p>
+                        </div>
                     </div> 
                 </div>
                 <div className={styles.form}>
@@ -131,16 +147,11 @@ function Create(){
                             <input className={styles.soloInput} name="name" value={input.value} onChange={handleChange}/><br/>
                             <p className={styles.error}>{errors.name ? errors.name : null}</p>
                         </div>
-                        <div className={styles.dataDouble}>
-                            <label>Weight (kg)</label><br/>
-                            <input className={styles.doubleInputLeft} placeholder='min' name="weight_min" value={input.value} onChange={handleChange}/>
-                            <input className={styles.doubleInputRight} placeholder='max' name="weight_max" value={input.value} onChange={handleChange}/><br/>
-                            <div className={styles.errorContainer}>
-                                <div className={styles.errorsLeft}>{errors.weight_min}</div>
-                                <div className={styles.errorsRight}>{errors.weight_max}</div>
-                            </div>
+                        <div className={styles.dataSingle}>
+                            <label>Image</label><br/>
+                            <input className={styles.soloInput} name="image" value={input.value} onChange={handleChange}/><br/>
+                            <p className={styles.error}>{errors.image ? errors.image : null}</p>
                         </div>
-
                         <div className={styles.dataDouble}>
                             <label>Height (cm)</label><br/>
                             <input className={styles.doubleInputLeft} placeholder='min' name="height_min" value={input.value} onChange={handleChange}/>
@@ -152,6 +163,17 @@ function Create(){
                         </div>
 
                         <div className={styles.dataDouble}>
+                            <label>Weight (kg)</label><br/>
+                            <input className={styles.doubleInputLeft} placeholder='min' name="weight_min" value={input.value} onChange={handleChange}/>
+                            <input className={styles.doubleInputRight} placeholder='max' name="weight_max" value={input.value} onChange={handleChange}/><br/>
+                            <div className={styles.errorContainer}>
+                                <div className={styles.errorsLeft}>{errors.weight_min}</div>
+                                <div className={styles.errorsRight}>{errors.weight_max}</div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.dataDouble}>
                             <label>Life Span (years)</label><br/>
                             <input className={styles.doubleInputLeft} placeholder='min' name="life_span_min" value={input.value} onChange={handleChange}/>
                             <input className={styles.doubleInputRight} placeholder='max' name="life_span_max" value={input.value} onChange={handleChange}/><br/>
@@ -161,11 +183,6 @@ function Create(){
                             </div>
                         </div>
                         
-                        <div className={styles.dataSingle}>
-                            <label>Image</label><br/>
-                            <input className={styles.soloInput} name="image" value={input.value} onChange={handleChange}/><br/>
-                            <p className={styles.error}>{errors.image ? errors.image : null}</p>
-                        </div>
 
                         <div className={styles.tempDiv}>
                             <label>Temperaments: </label><br/>
