@@ -107,39 +107,6 @@ function Create(){
         <div>
             <Navbar />
             <div className={styles.container}>
-                <div className={styles.padContainer}>
-                    <h2 className={styles.padTitle}>{input.name.toUpperCase()}</h2>
-                    <div className={styles.padDescription}>
-                        <div className={styles.imageContainer}>
-                            { input.image && !errors.image ? 
-                                (<>
-                                    <img className={styles.cinta1} src={require(`../../images/cinta2.png`)} alt="cinta"/>
-                                    <img className={styles.padImage} src={input.image} alt='img' />
-                                </>)
-                                : (<img className={styles.padImage} src={require("../../images/dog-unknown.png")} alt='img' />)
-                            }
-                        </div>
-                        <div className={styles.padDetail}>
-                            <p className={styles.padSubtitle}>HEIGHT</p>
-                            <p className={styles.padData}>
-                                {input.height_min ? `${input.height_min}` : null}
-                                {input.height_max ? ` - ${input.height_max} cm` : null}
-                            </p>
-                            <p className={styles.padSubtitle}>Weight</p>
-                            <p className={styles.padData}>
-                                {input.weight_min ? `${input.weight_min}` : null}
-                                {input.weight_max ? ` - ${input.weight_max} kg` : null }
-                            </p>
-                            <p className={styles.padSubtitle}>Life Span</p> 
-                            <p className={styles.padData}>
-                                {input.life_span_min ? `${input.life_span_min}` : null}
-                                    {input.life_span_max ? ` - ${input.life_span_max} years` : null}
-                            </p>
-                            <p className={styles.padSubtitle}>Temperaments</p>
-                            <p className={styles.padData}>{input.temperamentsName} </p>
-                        </div>
-                    </div> 
-                </div>
                 <div className={styles.form}>
                     <form onSubmit={handleSubmit}>
                         <div className={styles.dataSingle}>
@@ -202,6 +169,39 @@ function Create(){
                     
                     </form>
 
+                </div>
+                <div className={styles.padContainer}>
+                    <h2 className={styles.padTitle}>{input.name.toUpperCase()}</h2>
+                    <div className={styles.padDescription}>
+                        <div className={styles.imageContainer}>
+                            { input.image && !errors.image ? 
+                                (<>
+                                    <img className={styles.cinta1} src={require(`../../images/cinta2.png`)} alt="cinta"/>
+                                    <img className={styles.padImage} src={input.image} alt='img' />
+                                </>)
+                                : (<img className={styles.padImage} src={require("../../images/dog-unknown.png")} alt='img' />)
+                            }
+                        </div>
+                        <div className={styles.padDetail}>
+                            <p className={styles.padSubtitle}>HEIGHT</p>
+                            <p className={styles.padData}>
+                                {input.height_min ? `${input.height_min}` : null}
+                                {input.height_max ? ` - ${input.height_max} cm` : null}
+                            </p>
+                            <p className={styles.padSubtitle}>Weight</p>
+                            <p className={styles.padData}>
+                                {input.weight_min ? `${input.weight_min}` : null}
+                                {input.weight_max ? ` - ${input.weight_max} kg` : null }
+                            </p>
+                            <p className={styles.padSubtitle}>Life Span</p> 
+                            <p className={styles.padData}>
+                                {input.life_span_min ? `${input.life_span_min}` : null}
+                                    {input.life_span_max ? ` - ${input.life_span_max} years` : null}
+                            </p>
+                            <p className={styles.padSubtitle}>Temperaments</p>
+                            <p className={styles.padData}>{input.temperamentsName} </p>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>

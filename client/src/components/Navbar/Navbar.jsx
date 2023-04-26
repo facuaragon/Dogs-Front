@@ -12,6 +12,9 @@ function Navbar({paginate}){
 
     const handleSubmit = (event)=>{
         event.preventDefault();
+        if(!searchName){
+            return;
+        }
         if(!/^[a-zA-Z ]+$/.test(searchName)){
             alert("Letters Only")
         }else{
