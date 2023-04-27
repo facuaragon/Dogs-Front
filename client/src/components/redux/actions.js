@@ -25,7 +25,12 @@ export const cleanDetail = () =>{
 export const getDogsByName = (name) =>{
     return function(dispatch){
         axios.get(`http://localhost:3001/dogs/?name=${name}`)
-        .then(response => {return dispatch({type: GET_DOGS_BY_NAME, payload: response.data})})
+        .then(response => {
+            let shuffledResponse = response.data.sort(function () {
+                return Math.random() - 0.5;
+              });
+            return dispatch({type: GET_DOGS_BY_NAME, payload: shuffledResponse})
+        })
         .catch(error => {
             alert(error.response.data.error)})
     }
