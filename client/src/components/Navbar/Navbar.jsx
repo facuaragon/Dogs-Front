@@ -52,18 +52,15 @@ function Navbar({paginate}){
                                 <img src={require("../../images/create-button.png")} alt="create" className={styles.logo} />
                             </Link>
                         }
-
                     </div>
                     { pathname === "/home" ? (
                         <form onChange={handleChange} className={styles.group} >
-                            
                             <button type='submit' onClick={handleSubmit} className={styles.logo_container3}>
                                 <img src={require("../../images/search-button.png")} alt="search" className={styles.logo} />
                             </button>
                             <input type='search' placeholder="Search By Breed" onKeyDown={handleKeyDown} className={styles.input}/>
-                        </form>
-                    ) : null }
-                    
+                        </form>) : null 
+                    }
                 </div>
             </nav>
         </div>

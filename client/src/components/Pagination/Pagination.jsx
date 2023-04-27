@@ -3,13 +3,10 @@ import styles from "./Pagination.module.css"
 
 const Paginas = ({dogsPerPage, totalDogs, paginate, currentPage}) => {
     let pageNumbers = [];
-
     for (let i=1; i<= Math.ceil(totalDogs/dogsPerPage); i++){
         pageNumbers.push(i);
     }
-
     if(pageNumbers.length===1) pageNumbers=[];
-
     return (
         <nav >
             <ul className={styles.list}>

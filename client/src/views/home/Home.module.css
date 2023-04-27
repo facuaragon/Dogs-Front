@@ -97,7 +97,7 @@ body{
 .button_container {
     position: fixed;
     margin-top: 5px;
-    margin-left: -120px;
+    margin-left: -100px;
     background-color: transparent;
     border: none;
     cursor: pointer;

@@ -14,8 +14,7 @@ function Home(){
     const dispatch = useDispatch();
     const allDogs = useSelector((state)=>state.allDogs);
     const allTemperaments = useSelector((state)=>state.temperaments);
-    
-    const [loading, setLoading] = useState(false);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [dogsPerPage] = useState(8);
 
@@ -23,23 +22,18 @@ function Home(){
     const indexOfFirstDog = indexOfLastDog - dogsPerPage;
     const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog)
     
-    // change page
     const paginate = (pageNumber)=>setCurrentPage(pageNumber)
 
     useEffect(()=>{
-        setLoading(true);
-
         dispatch( getAllDogs() );
         dispatch( getTemperaments() )
-        setLoading(false);
         return ( () => {
             dispatch(cleanDetail());
             dispatch(cleanDogs());
         } )
     }, [dispatch] );
 
-
-
+// FILTERS HANDLERS
     const handlerFilterName = (event) => {
         dispatch(cleanDogs());
         dispatch(filterByName(event.target.value))
@@ -50,7 +44,6 @@ function Home(){
         dispatch(cleanDogs());
         dispatch(filterByWeight(event.target.value))
         setCurrentPage(1)
-        
     }
 
     function handlerFilterCreated (event) {
@@ -65,7 +58,7 @@ function Home(){
         dispatch(filterByTemperament(event.target.value))
         setCurrentPage(1)
     }
-
+    
     function handlerFilters () {
         dispatch(cleanDogs());
         dispatch(getAllDogs())
@@ -123,7 +116,7 @@ function Home(){
                 </div>
                 <div className={styles.showing}>
                     <div className={styles.cards}>
-                        <Cards dogs={currentDogs} loading={loading}  />
+                        <Cards dogs={currentDogs}/>
                     </div>
                     <div className={styles.pagination}>
                         <Pagination dogsPerPage={dogsPerPage} totalDogs={allDogs.length} paginate={paginate} currentPage={currentPage}/>

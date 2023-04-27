@@ -1,20 +1,11 @@
-
-import {Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import axios from "axios";
+import {Route, Routes } from "react-router-dom";
 
 import Landing from './views/landing/Landing';
 import Home from './views/home/Home';
 import Detail from './views/detail/Detail';
 import Create from './views/create/Create';
 
-import Pagination from './components/Pagination/Pagination';
-
-
-
 function App() {
-    
-
   return (
     <div className="App">
       <Routes>
@@ -22,13 +13,8 @@ function App() {
         <Route exact path='/home' element={ <Home /> } />
         <Route path='/home/:id' element={ <Detail /> } />
         <Route path='/create' element={ <Create /> } />
-
-        <Route path='/pagination' element={ <Pagination /> } />
-
       </Routes>
-
     </div>
   );
 }
-
 export default App;

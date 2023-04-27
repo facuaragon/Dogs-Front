@@ -22,9 +22,9 @@ router.get("/dogs", async ( req, res ) => {
         if(name){
             const dog = allDogs.filter(dog=> dog.name.toLowerCase().includes(name.toLowerCase()))
             if(dog.length){
-                return res.status(200).send(dog) //! ojo aca json o send?
+                return res.status(200).send(dog)
             } else {
-                return res.status(404).send({error: "No matches for these name"})
+                return res.status(404).send({error: "No matches for this name"})
             }
         } else {
             return res.status(201).json(allDogs)

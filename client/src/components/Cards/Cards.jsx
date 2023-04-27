@@ -1,12 +1,7 @@
 import styles from './Cards.module.css'
 import Card from '../Card/Card'
 
-function Cards({ dogs, loading }){
-
-    if(loading){
-        return <h2>Loading...</h2>
-    }
-
+function Cards({ dogs }){
     return (
         <div className={styles.cardList}>
             { dogs.map( dog => (

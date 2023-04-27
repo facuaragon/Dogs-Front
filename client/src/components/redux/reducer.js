@@ -1,4 +1,3 @@
-
 import { GET_ALL_DOGS, GET_DOG_DETAIL, CLEAN_DETAIL, GET_DOGS_BY_NAME, GET_TEMPERAMENTS, FILTER_BY_NAME, FILTER_BY_WEIGHT, FILTER_CREATED_DOG, FILTER_BY_TEMPERAMENTS, CLEAN_FILTERS, CLEAN_DOGS } from "./action-types"
 
 const initialState = {
@@ -97,7 +96,8 @@ const rootReducer = (state=initialState, action) =>{
             const filteredApi = allDogs.filter(dog => !dog.createdInDb)
             return {
                 ...state,
-                allDogs: action.payload === "all" ? state.dogsFiltered : ( action.payload === "Created By Users" ? filteredCreated : filteredApi )
+                allDogs: action.payload === "all" ? state.dogsFiltered : ( action.payload === "Created By Users" ? filteredCreated : filteredApi ),
+                dogsFiltered: action.payload === "all" ? state.dogsFiltered : ( action.payload === "Created By Users" ? filteredCreated : filteredApi )
             }
         case FILTER_BY_TEMPERAMENTS:
             const dogs = state.dogsFiltered
@@ -106,6 +106,7 @@ const rootReducer = (state=initialState, action) =>{
             })
             return {
                 ...state,
+                dogsFiltered: filteredTemp,
                 allDogs: filteredTemp,
             };
         case CLEAN_FILTERS:

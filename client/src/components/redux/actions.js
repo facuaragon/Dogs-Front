@@ -4,7 +4,10 @@ import axios from "axios";
 export const getAllDogs = () =>{
     return async function(dispatch){
         const response = await axios.get("http://localhost:3001/dogs/");
-        dispatch({type: GET_ALL_DOGS, payload: response.data})
+        let shuffledResponse = response.data.sort(function () {
+            return Math.random() - 0.5;
+          });
+        dispatch({type: GET_ALL_DOGS, payload: shuffledResponse})
     }
 }
 

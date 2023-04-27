@@ -16,8 +16,6 @@ function Create(){
     },[dispatch])
 
     const allTemperaments = useSelector((state)=>state.temperaments)
-    
-
     const disabled = (<button className={styles.submit} type="submit" disabled>Create!</button>)
 
     const [input, setInput]=useState({
@@ -70,7 +68,6 @@ function Create(){
 
         const response = await axios.post("http://localhost:3001/dogs/", newDog)
         const dogCreated = response.data;
-        
 
         if(dogCreated.error){
             alert("The breeds name already exists")
@@ -81,14 +78,9 @@ function Create(){
     }
 
     const handleSelect = (event) => {
-        const selectedOptions = Array.from(event.target.selectedOptions);
-        
-      
-        
+        const selectedOptions = Array.from(event.target.selectedOptions);     
         const selectedValues = selectedOptions.map(option => Number(option.value))
         const selectedNames = selectedOptions.map(option => option.title);
-        
-
         setInput({
             ...input,
             [event.target.name]: selectedValues,
@@ -98,11 +90,9 @@ function Create(){
             ...input,
             [event.target.name]: selectedValues
         }))
-
         return selectedValues
     }
 
-  
     return (
         <div>
             <Navbar />
@@ -128,7 +118,6 @@ function Create(){
                                 <div className={styles.errorsRight}>{errors.height_max}</div>
                             </div>
                         </div>
-
                         <div className={styles.dataDouble}>
                             <label>Weight (kg)</label><br/>
                             <input className={styles.doubleInputLeft} placeholder='min' name="weight_min" value={input.value} onChange={handleChange}/>
@@ -138,8 +127,6 @@ function Create(){
                                 <div className={styles.errorsRight}>{errors.weight_max}</div>
                             </div>
                         </div>
-
-
                         <div className={styles.dataDouble}>
                             <label>Life Span (years)</label><br/>
                             <input className={styles.doubleInputLeft} placeholder='min' name="life_span_min" value={input.value} onChange={handleChange}/>
@@ -149,8 +136,6 @@ function Create(){
                                 <div className={styles.errorsRight}>{errors.life_span_max}</div>
                             </div>
                         </div>
-                        
-
                         <div className={styles.tempDiv}>
                             <label>Temperaments: </label><br/>
                             <span className={styles.tempSpan}>(hold down Ctrl or Cmd button to select multiple options)</span><br/>
@@ -166,9 +151,7 @@ function Create(){
                             <p className={styles.error}>{errors.temperaments}</p>
                         </div>
                         { errors.name ? disabled : ( errors.height_max ? disabled : ( errors.height_min ? disabled : ( errors.weight_min ? disabled : ( errors.weight_max ? disabled : ( errors.life_span_min ? disabled : ( errors.life_span_max ? disabled : ( errors.temperaments ? disabled : ( errors.image ? disabled : <button className={styles.submit} type="submit">Create!</button>))))))))}
-                    
                     </form>
-
                 </div>
                 <div className={styles.padContainer}>
                     <h2 className={styles.padTitle}>{input.name.toUpperCase()}</h2>
