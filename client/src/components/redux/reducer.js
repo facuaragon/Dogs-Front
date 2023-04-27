@@ -74,13 +74,11 @@ const rootReducer = (state=initialState, action) =>{
                 }
             })
             const filteredWeight = action.payload === 'min_weight' ? weights.sort((a, b) => {
-                    if(isNaN(a.min_weight) || isNaN(b.min_weight)) return 1
                     if(a.min_weight > b.min_weight) return 1;
                     if(a.min_weight < b.min_weight) return -1;
                     return 0
                 })  :
                 weights.sort((a,b) =>{
-                    if(isNaN(a.max_weight) || isNaN(b.max_weight)) return 1
                     if(b.max_weight > a.max_weight) return 1;
                     if(b.max_weight < a.max_weight) return -1;
                     return 0
