@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getAllDogs = () =>{
     return async function(dispatch){
-        const response = await axios.get("http://localhost:3001/dogs/");
+        const response = await axios.get("/dogs/");
         let shuffledResponse = response.data.sort(function () {
             return Math.random() - 0.5;
           });
@@ -13,7 +13,7 @@ export const getAllDogs = () =>{
 
 export const getDogDetail = (id) =>{
     return async function(dispatch){
-        const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+        const response = await axios.get(`/dogs/${id}`);
         dispatch({type: GET_DOG_DETAIL, payload: response.data})
     }
 }
@@ -24,7 +24,7 @@ export const cleanDetail = () =>{
 
 export const getDogsByName = (name) =>{
     return function(dispatch){
-        axios.get(`http://localhost:3001/dogs/?name=${name}`)
+        axios.get(`/dogs/?name=${name}`)
         .then(response => {
             let shuffledResponse = response.data.sort(function () {
                 return Math.random() - 0.5;
@@ -44,7 +44,7 @@ export const addDog = (dog) =>{
 
 export const getTemperaments = () => {
     return async function(dispatch){
-        const response = await axios.get("http://localhost:3001/temperaments")
+        const response = await axios.get("/temperaments")
         dispatch({type: GET_TEMPERAMENTS, payload: response.data})
     }
 }

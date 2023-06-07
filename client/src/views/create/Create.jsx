@@ -66,7 +66,7 @@ function Create(){
             image: input.image 
         }
 
-        const response = await axios.post("http://localhost:3001/dogs/", newDog)
+        const response = await axios.post("/dogs/", newDog)
         const dogCreated = response.data;
 
         if(dogCreated.error){
